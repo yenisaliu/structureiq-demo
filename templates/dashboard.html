@@ -1,0 +1,64 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ asset.capitalize() }} Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+    <div class="container">
+
+        <!-- 👋 Welcome message -->
+        <h5 class="text-muted mb-2">Welcome, {{ user.capitalize() }}</h5>
+        <h1 class="mb-4">{{ asset.capitalize() }} Dashboard</h1>
+
+        <!-- ✅ Dropdown form starts here -->
+        <form method="POST" class="row mb-4">
+            <div class="col-md-4">
+                <label for="asset" class="form-label">Select Asset Type:</label>
+                <select class="form-select" name="asset" id="asset">
+                    <option value="bridge" {% if asset == 'bridge' %}selected{% endif %}>Bridge</option>
+                    <option value="building" {% if asset == 'building' %}selected{% endif %}>Building</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="user" class="form-label">Select User Role:</label>
+                <select class="form-select" name="user" id="user">
+                    <option value="engineer" {% if user == 'engineer' %}selected{% endif %}>Engineer</option>
+                    <option value="inspector" {% if user == 'inspector' %}selected{% endif %}>Inspector</option>
+                    <option value="analyst" {% if user == 'analyst' %}selected{% endif %}>Analyst</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">Load Dashboard</button>
+            </div>
+        </form>
+        <!-- ✅ Dropdown form ends here -->
+
+        <!-- 🔢 Data table -->
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Asset Type</th>
+                    <th>Stress</th>
+                    <th>Temp Start</th>
+                    <th>Temp End</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    {% for item in row %}
+                    <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+
